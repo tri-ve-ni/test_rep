@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+    </edmx:Reference>
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="CatalogService" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityContainer Name="EntityContainer" m:IsDefaultEntityContainer="true">
+                <EntitySet Name="Material" EntityType="CatalogService.Material"/>
+                <EntitySet Name="Supplier" EntityType="CatalogService.Supplier"/>
+                <EntitySet Name="Countries" EntityType="CatalogService.Countries"/>
+                <EntitySet Name="Countries_texts" EntityType="CatalogService.Countries_texts"/>
+                <AssociationSet Name="Material_supplier" Association="CatalogService.Material_supplier">
+                    <End Role="Material" EntitySet="Material"/>
+                    <End Role="Supplier" EntitySet="Supplier"/>
+                </AssociationSet>
+                <AssociationSet Name="Supplier_Country" Association="CatalogService.Supplier_Country">
+                    <End Role="Supplier" EntitySet="Supplier"/>
+                    <End Role="Countries" EntitySet="Countries"/>
+                </AssociationSet>
+                <AssociationSet Name="Countries_texts_1" Association="CatalogService.Countries_texts_1">
+                    <End Role="Countries" EntitySet="Countries"/>
+                    <End Role="Countries_texts" EntitySet="Countries_texts"/>
+                </AssociationSet>
+                <AssociationSet Name="Countries_localized" Association="CatalogService.Countries_localized">
+                    <End Role="Countries" EntitySet="Countries"/>
+                    <End Role="Countries_texts" EntitySet="Countries_texts"/>
+                </AssociationSet>
+            </EntityContainer>
+            <EntityType Name="Material">
+                <Key>
+                    <PropertyRef Name="MaterialId"/>
+                </Key>
+                <Property Name="MaterialId" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="MaterialName" Type="Edm.String"/>
+                <Property Name="Quantity" Type="Edm.Int32"/>
+                <Property Name="Description" Type="Edm.String"/>
+                <Property Name="UnitPrice" Type="Edm.Int32"/>
+                <NavigationProperty Name="supplier" Relationship="CatalogService.Material_supplier" FromRole="Material" ToRole="Supplier"/>
+                <Property Name="supplier_SupplierId" Type="Edm.Int32"/>
+            </EntityType>
+            <EntityType Name="Supplier">
+                <Key>
+                    <PropertyRef Name="SupplierId"/>
+                </Key>
+                <Property Name="SupplierId" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="SupplierName" Type="Edm.String"/>
+                <Property Name="SupplierAddress" Type="Edm.String"/>
+                <NavigationProperty Name="Country" Relationship="CatalogService.Supplier_Country" FromRole="Supplier" ToRole="Countries"/>
+                <Property Name="Country_code" Type="Edm.String" MaxLength="3"/>
+                <Property Name="phone" Type="Edm.Int32"/>
+                <NavigationProperty Name="material" Relationship="CatalogService.Material_supplier" FromRole="Supplier" ToRole="Material"/>
+            </EntityType>
+            <EntityType Name="Countries">
+                <Key>
+                    <PropertyRef Name="code"/>
+                </Key>
+                <Property Name="name" Type="Edm.String" MaxLength="255"/>
+                <Property Name="descr" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="code" Type="Edm.String" MaxLength="3" Nullable="false"/>
+                <NavigationProperty Name="texts" Relationship="CatalogService.Countries_texts_1" FromRole="Countries" ToRole="Countries_texts"/>
+                <NavigationProperty Name="localized" Relationship="CatalogService.Countries_localized" FromRole="Countries" ToRole="Countries_texts"/>
+            </EntityType>
+            <EntityType Name="Countries_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="code"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="name" Type="Edm.String" MaxLength="255"/>
+                <Property Name="descr" Type="Edm.String" MaxLength="1000"/>
+                <Property Name="code" Type="Edm.String" MaxLength="3" Nullable="false"/>
+            </EntityType>
+            <Association Name="Material_supplier">
+                <End Role="Material" Type="CatalogService.Material" Multiplicity="*"/>
+                <End Role="Supplier" Type="CatalogService.Supplier" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="Supplier">
+                        <PropertyRef Name="SupplierId"/>
+                    </Principal>
+                    <Dependent Role="Material">
+                        <PropertyRef Name="supplier_SupplierId"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="Supplier_Country">
+                <End Role="Supplier" Type="CatalogService.Supplier" Multiplicity="*"/>
+                <End Role="Countries" Type="CatalogService.Countries" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="Countries">
+                        <PropertyRef Name="code"/>
+                    </Principal>
+                    <Dependent Role="Supplier">
+                        <PropertyRef Name="Country_code"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="Countries_texts_1">
+                <End Role="Countries" Type="CatalogService.Countries" Multiplicity="1">
+                    <OnDelete Action="Cascade"/>
+                </End>
+                <End Role="Countries_texts" Type="CatalogService.Countries_texts" Multiplicity="*"/>
+            </Association>
+            <Association Name="Countries_localized">
+                <End Role="Countries" Type="CatalogService.Countries" Multiplicity="*"/>
+                <End Role="Countries_texts" Type="CatalogService.Countries_texts" Multiplicity="0..1"/>
+            </Association>
+            <Annotations Target="CatalogService.Supplier/Country" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Country/Region"/>
+                <Annotation Term="Core.Description" String="Country/region code as specified by ISO 3166-1"/>
+            </Annotations>
+            <Annotations Target="CatalogService.Supplier/Country_code" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Country/Region"/>
+                <Annotation Term="Common.ValueList">
+                    <Record Type="Common.ValueListType">
+                        <PropertyValue Property="Label" String="Country/Region"/>
+                        <PropertyValue Property="CollectionPath" String="Countries"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="Country_code"/>
+                                    <PropertyValue Property="ValueListProperty" String="code"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="name"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Core.Description" String="Country/region code as specified by ISO 3166-1"/>
+            </Annotations>
+            <Annotations Target="CatalogService.Countries" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Identification">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="name"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="CatalogService.Countries/name" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Name"/>
+            </Annotations>
+            <Annotations Target="CatalogService.Countries/descr" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Description"/>
+            </Annotations>
+            <Annotations Target="CatalogService.Countries/code" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Text" Path="name"/>
+                <Annotation Term="Common.Label" String="Country/Region Code"/>
+            </Annotations>
+            <Annotations Target="CatalogService.Countries_texts/locale" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Language Code"/>
+            </Annotations>
+            <Annotations Target="CatalogService.Countries_texts/name" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Name"/>
+            </Annotations>
+            <Annotations Target="CatalogService.Countries_texts/descr" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Description"/>
+            </Annotations>
+            <Annotations Target="CatalogService.Countries_texts/code" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Text" Path="name"/>
+                <Annotation Term="Common.Label" String="Country/Region Code"/>
+            </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

@@ -1,0 +1,58 @@
+<mvc:View controllerName="materialmasterr.controller.supend"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <Page id="page" title="Material Management">
+        <content>
+            <Table id="Table4" items="{supdata>/}" growing="true" growingThreshold="5">
+                <headerToolbar>
+                    <OverflowToolbar id="toolbar">
+                        <Title id="1Title1" text="Suppliers" level="H2" />
+                        <ToolbarSpacer id="1ToolbarSpacer1" />
+                        <SearchField id="1SearchField1" width="30%" search="onSearch" />
+                        <Button id ="1sort" width="50px" icon="sap-icon://sort" press="onSort"/>
+                        <Button id ="1Add" text ="ADD" width="90px" press ="onAdd" />
+                    </OverflowToolbar>
+                </headerToolbar>
+                <columns>
+                    <Column id="Column1">
+                        <Label id="Label1" text="Supplier ID"></Label>
+                    </Column>
+                    <Column id="_IDGenColumn2">
+                        <Label id="_IDGenLabel2" text="Supplier Name"></Label>
+                    </Column>
+                    <Column id="_IDGenColumn3">
+                        <Label id="_IDGenLabel3" text="Material Sold"></Label>
+                    </Column>
+                    <Column id="_IDGenColumn4">
+                        <Label id="_IDGenLabel4" text="Supplier Address"></Label>
+                    </Column>
+                    <Column id="_IDGenColumn5">
+                        <Label id="_IDGenLabel5" text="Country"></Label>
+                    </Column>
+                    <Column id="_IDGenColumn6">
+                        <Label id="_IDGenLabel6" text="Phone Number"></Label>
+                    </Column>
+                    <Column id="_IDGenColumn7">
+                        <Label id="_IDGenLabel7" text="Actions"></Label>
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem id="_IDGenColumnListItem1" class="sapUiSizeCompact">
+                        <cells>
+                            <Text id="Text1" text="{supdata>SupplierId}"></Text>
+                            <Text id="Text2" text="{supdata>SupplierName}"></Text>
+                            <Text id="Text3" text="{supdata>material_MaterialName}"></Text>
+                            <Text id="Text4" text="{supdata>SupplierAddress}"></Text>
+                            <Text id="Text5" text="{supdata>Country_code}"></Text>
+                            <Text id="Text6" text="{supdata>phone}"></Text>  
+                            <HBox id="Actions">
+                                <Button id="Button" icon="sap-icon://edit" class="sapUiTinyMarginEnd" press="onUpdate" />
+                                <Button id="Button1" icon="sap-icon://delete" type="Reject" press="onDelete" />
+                            </HBox>                    
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </content>
+    </Page>
+</mvc:View>

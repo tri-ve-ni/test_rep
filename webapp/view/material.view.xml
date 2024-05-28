@@ -1,0 +1,56 @@
+<mvc:View controllerName="materialmasterr.controller.material"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <Page id="page" showHeader="false">
+        <content>
+            <Table id="Table1" items="{matdata>/}" growing="true" growingThreshold="5">
+            <!-- <Table id="Table1"  items="{path:'matdata>/' ,parameters:{expand: 'supplier'}}" growing="true" growingThreshold="5"> -->
+            
+                <headerToolbar>
+                    <OverflowToolbar id="toolbar">
+                        <ToolbarSpacer id="ToolbarSpacer1" />
+                        <SearchField id="SearchField1" width="30%" search="onSearch" />
+                        <Button id ="sort" width="50px" icon="sap-icon://sort" press="onSort"/>
+                        <Button id ="Add" text ="ADD" width="90px" press ="onAdd" />
+                    </OverflowToolbar>
+                </headerToolbar>
+
+                <columns>
+                    <Column id="_IDGenColumn1">
+                        <Label id="_IDGenLabel1" text="Material ID"></Label>
+                    </Column>
+                    <Column id="_IDGenColumn2">
+                        <Label id="_IDGenLabel2" text="Material Name"></Label>
+                    </Column>
+                    <Column id="_IDGenColumn3">
+                        <Label id="_IDGenLabel3" text="Quantity"></Label>
+                    </Column>
+                    <Column id="_IDGenColumn4">
+                        <Label id="_IDGenLabel4" text="Description"></Label>
+                    </Column>
+                    <Column id="_IDGenColumn5">
+                        <Label id="_IDGenLabel5" text="Unit Price"></Label>
+                    </Column>
+                    <Column id="_IDGenColumn6">
+                        <Label id="_IDGenLabel6" text="Actions"></Label>
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem id="_IDGenColumnListItem1" type="Navigation" press=".onNavToDetails">
+                        <cells>
+                            <Text id="_IDGenText1" class="sapUiSmallMarginBegin" text="{matdata>MaterialId}"></Text>
+                            <Text id="_IDGenText3" class="sapUiSmallMarginBegin" text="{matdata>MaterialName}"></Text>
+                            <Text id="_IDGenText2" class="sapUiSmallMarginBegin" text="{matdata>Quantity}"></Text>
+                            <Text id="_IDGenText4"                               text="{matdata>Description}"></Text>
+                            <Text id="_IDGenText5" class="sapUiSmallMarginBegin" text="{matdata>UnitPrice}"></Text>
+                            <HBox id="Actions">
+                                <Button id="Button" icon="sap-icon://edit" class="sapUiTinyMarginEnd" press="onUpdate" />
+                                <Button id="Button1" icon="sap-icon://delete" type="Reject" press="onDelete" />
+                            </HBox>                      
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </content>
+    </Page>
+</mvc:View>

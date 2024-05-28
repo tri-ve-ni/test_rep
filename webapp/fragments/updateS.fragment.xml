@@ -1,0 +1,29 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core" >
+    <Dialog id="_IDGenDialog12" title="Edit Data">
+        <content>
+            <f:SimpleForm id="Change354"
+            layout="ResponsiveGridLayout" labelSpanXL="3" labelSpanL="3" labelSpanM="3"
+            labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4"
+            emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false" >
+            <f:content>
+                <Label id="Label1" text="Supplier ID" />
+                <Input id="supId" editable="false" value="{oPayloadModel>/oPayload/SupplierId}" />
+                <Label id="Label2" text="Supplier Name" />
+                <Input id="supName" editable="true" value="{oPayloadModel>/oPayload/SupplierName}" />
+                <Label id="Label4" text="Supplier Address" />
+                <Input id="add" editable="true" value="{oPayloadModel>/oPayload/SupplierAddress}" />
+                <Label id="Label5" text="Country" />
+                <Input id="nat" editable="true" value="{oPayloadModel>/oPayload/Country}" />
+                <Label id="Label6" text="Phone Number" />
+                <Input id="phno" editable="true" value="{oPayloadModel>/oPayload/phone}"/>
+               
+            </f:content>
+        </f:SimpleForm>
+        </content>
+        <FlexBox id="FlexBox1"  alignItems="Start" justifyContent="End">
+			<Button id="_IDGenButton2" class="sapUiTinyMargin" type="Accept" text="Save" press="savedata"/>
+            <Button id="_IDGenButton1" class="sapUiTinyMargin" text="Close" press="CloseDialog"/>
+		</FlexBox>
+    </Dialog>
+</core:FragmentDefinition >

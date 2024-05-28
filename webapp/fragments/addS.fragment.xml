@@ -1,0 +1,29 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core" >
+    <Dialog id="Dialogsup" title="Add New Supplier">
+        <content>
+            <f:SimpleForm id="SimpleAdd"
+            layout="ResponsiveGridLayout" labelSpanXL="3" labelSpanL="3" labelSpanM="3"
+            labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4"
+            emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false" >
+            <f:content>
+                <Label id="Label124" text="Supplier ID" />
+                <Input id="supId2"/>
+                <Label id="Label22" text="Supplier Name" />
+                <Input id="supName2" />
+                <Label id="Label42" text="Supplier Address" />
+                <Input id="add2"/>
+                <Label id="Label52" text="Country" />
+                <Input id="nat2" />
+                <Label id="Label62" text="Phone Number" />
+                <Input id="phno2" />
+               
+            </f:content>
+        </f:SimpleForm>
+        </content>
+        <FlexBox id="FlexBox12"  alignItems="Start" justifyContent="End">
+			<Button id="_IDGenButton22" class="sapUiTinyMargin" type="Accept" text="Save" press="savedata1"/>
+            <Button id="_IDGenButton12" class="sapUiTinyMargin" text="Close" press="CloseDialog1"/>
+		</FlexBox>
+    </Dialog>
+</core:FragmentDefinition >

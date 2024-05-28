@@ -1,0 +1,35 @@
+<mvc:View controllerName="materialmasterr.controller.mainPage"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m" xmlns:form="sap.ui.layout.form">
+    <Page id="page" title="{i18n>title}">
+        <customHeader>
+			<Toolbar id="Toolbar">
+				<Title id="Title" class="sapUiResponsiveMargin" text="Material Management" level="H2"/>
+				<ToolbarSpacer id="ToolbarSpacer"/>
+                <Button id ="account" icon="sap-icon://account" />
+                <Button id ="settings" icon="sap-icon://action-settings" />
+			</Toolbar>
+		</customHeader>
+        
+        <IconTabBar id="iconTabBar" expanded="{device>/isNoPhone}" class="sapUiNoContentPadding">
+            <items>
+               <IconTabFilter id="_IDGenIconTabFilter1" text="Materials" key="info">
+                    <content>
+                        <mvc:XMLView id="matview" height="10000px" viewName="materialmasterr.view.material"/>
+                    </content>
+               </IconTabFilter>
+
+               <IconTabFilter id="_IDGenIconTabFilter2" text="Suppliers" key="statistics">
+                <content>
+                        <mvc:XMLView id="supview" height="10000px" viewName="materialmasterr.view.supplier"/>
+                    </content>
+                </IconTabFilter>
+            </items>
+         </IconTabBar>
+
+        <!-- <content>
+        <Button id="Button1" class="sapUiSmallMargin" text="Material Information" press="onNavToMat"/>
+        <Button id="Button2" class="sapUiSmallMargin" text="Suppliers List" press="onNavToSup"/>
+        </content> -->
+    </Page>
+</mvc:View>

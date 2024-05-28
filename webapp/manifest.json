@@ -1,0 +1,181 @@
+{
+    "_version": "1.59.0",
+    "sap.app": {
+        "id": "materialmasterr",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "0.0.1"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "resources": "resources.json",
+        "sourceTemplate": {
+            "id": "@sap/generator-fiori:basic",
+            "version": "1.13.4",
+            "toolsId": "c823c913-e58f-4ed0-8a90-4cb4341bf828"
+        },
+        "dataSources": {
+            "mainService": {
+                "uri": "/v2/odata/v4/catalog/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [],
+                    "localUri": "localService/metadata.xml",
+                    "odataVersion": "2.0"
+                }
+            }
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "flexEnabled": true,
+        "dependencies": {
+            "minUI5Version": "1.123.2",
+            "libs": {
+                "sap.m": {},
+                "sap.ui.core": {},
+                "sap.f": {},
+                "sap.suite.ui.generic.template": {},
+                "sap.ui.comp": {},
+                "sap.ui.generic.app": {},
+                "sap.ui.table": {},
+                "sap.ushell": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "materialmasterr.i18n.i18n"
+                }
+            },
+            "": {
+                "dataSource": "mainService",
+                "preload": true,
+                "settings": {}
+            }
+        },
+        "resources": {
+            "css": [
+                {
+                    "uri": "css/style.css"
+                }
+            ]
+        },
+        "routing": {
+            "config": {
+                "routerClass": "sap.m.routing.Router",
+                "viewType": "XML",
+                "async": true,
+                "viewPath": "materialmasterr.view",
+                "controlAggregation": "pages",
+                "controlId": "app",
+                "clearControlAggregation": false
+            },
+            "routes": [
+                {
+                    "name": "RoutemainPage",
+                    "pattern": ":?query:",
+                    "target": [
+                        "TargetmainPage"
+                    ]
+                },
+                {
+                    "name": "material",
+                    "pattern": "material",
+                    "target": [
+                        "material"
+                    ]
+                },
+                {
+                    "name": "supplier",
+                    "pattern": "supplier",
+                    "target": [
+                        "supplier"
+                    ]
+                },
+                {
+                    "name": "supplier2",
+                    "pattern": "supplier2/{MaterialName}",
+                    "target": [
+                        "supplier2"
+                    ]
+                },
+                {
+                    "name": "supend",
+                    "pattern": "supend/{SupplierId}",
+                    "target": [
+                        "supend"
+                    ]
+                }
+            ],
+            "targets": {
+                "TargetmainPage": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewId": "mainPage",
+                    "viewName": "mainPage"
+                },
+                "material": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewId": "material",
+                    "viewName": "material"
+                },
+                "supplier": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewId": "supplier",
+                    "viewName": "supplier"
+                },
+                "supplier2": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewId": "supplier2",
+                    "viewName": "supplier2"
+                },
+                "supend": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewId": "supend",
+                    "viewName": "supend"
+                }
+            }
+        },
+        "rootView": {
+            "viewName": "materialmasterr.view.App",
+            "type": "XML",
+            "async": true,
+            "id": "App"
+        }
+    },
+    "sap.cloud": {
+        "public": true,
+        "service": "materialmasterr"
+    }
+}

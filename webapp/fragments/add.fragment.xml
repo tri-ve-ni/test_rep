@@ -1,0 +1,29 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core" >
+    <Dialog id="_IDGenDialog2" title="Add New Material">
+        <content>
+            <f:SimpleForm id="SimpleFormChange"
+            layout="ResponsiveGridLayout" labelSpanXL="3" labelSpanL="3" labelSpanM="3"
+            labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4"
+            emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false" >
+            <f:content>
+                <Label id="Label12" text="Material ID" />
+                <Input id="matId2"/>
+                <Label id="Label22" text="Material Name" />
+                <Input id="MatName2" />
+                <Label id="Label32" text="Quantity" />
+                <Input id="Quan2" />
+                <Label id="Label42" text="Material Description" />
+                <Input id="des2"/>
+                <Label id="Label52" text="price" />
+                <Input id="cost2" />
+               
+            </f:content>
+        </f:SimpleForm>
+        </content>
+        <FlexBox id="FlexBox12"  alignItems="Start" justifyContent="End">
+			<Button id="_IDGenButton22" class="sapUiTinyMargin" type="Accept" text="Save" press="savedata1"/>
+            <Button id="_IDGenButton12" class="sapUiTinyMargin" text="Close" press="CloseDialog1"/>
+		</FlexBox>
+    </Dialog>
+</core:FragmentDefinition >
